@@ -9,6 +9,9 @@ $(document).ready(function(){
 	let channelArr = [];
 	let vidArr = [];
 	let timeArr = [];
+	const crtOn = new Audio("http://www.jarrodyellets.com/sounds/CRTOn.mp3");
+	const crtOff = new Audio("http://www.jarrodyellets.com/sounds/CRTOff.mp3");
+	const chSound = new Audio("http://www.jarrodyellets.com/sounds/chSound.mp3");
 	const apiURL = "https://www.googleapis.com/youtube/v3/search"
 	const apiKey = "AIzaSyBuIIBsq9urRaWdEYTKqSjW97wkhL1CO0o"
 	let Channel = function(channel, id, description){
@@ -23,6 +26,7 @@ $(document).ready(function(){
 		power = !power;
 		$(".power").toggleClass("powerOn");
 		if(power){
+			crtOn.play();
 			powerUp = true;
 			videoArr = [];
 			insertVideos();
@@ -31,7 +35,12 @@ $(document).ready(function(){
 			startUp();
 			console.log(videos);
 		} else if(!power){
-			turnOff();
+			crtOn.pause();
+      crtOn.currentTime = 0;
+			crtOff.play();
+			setTimeout(function(){
+				turnOff();
+			}, 300);
 			$(".channelScreen").empty();
 			channel = 1;
 			timeArr.forEach(function(time){
@@ -40,6 +49,7 @@ $(document).ready(function(){
 		}
 	});
 	$("#upButton").on("click", function(){
+		chSound.play();
 		if(channel < catArr.length + 1 && power && !powerUp){
 			channel++;
 			clearDiv(".channelScreen", channel);
@@ -48,6 +58,7 @@ $(document).ready(function(){
 		}
 	});
 	$("#downButton").on("click", function(){
+		chSound.play();
 		if(channel > 1 && power && !powerUp){
 			channel--;
 			clearDiv(".channelScreen", channel);
@@ -80,7 +91,7 @@ $(document).ready(function(){
 			$(".screen").append("<div class='channels'>" + channel + ". Channel Guide</div>");
 		} else if(channel > 1){
 				id = videos[channel - 2].id;
-				let iFrame = "<iframe class='movie onScreen' src='https://www.youtube.com/embed/" + id + "?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1'></iframe>";
+				let iFrame = "<iframe class='movie onScreen' src='https://www.youtube.com/embed/" + id + "?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1&playsinline=1'></iframe>";
 				$(".screen").empty();
 				$(".screen").append(iFrame);
 				$(".screen").append("<div class='channels'>" + channel + ". " + videos[channel - 2].channel + "</div>");
@@ -105,6 +116,7 @@ $(document).ready(function(){
 					q: q,
 					maxResults: 50,
 					safeSearch: 'moderate',
+					videoLicense: 'youtube',
 					relevanceLanguage: 'en',
 					type: 'video',
 					key: apiKey},
