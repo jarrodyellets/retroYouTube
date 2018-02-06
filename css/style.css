@@ -321,10 +321,10 @@ body {
 	left: 30px;
 	font-size: 30px;
 	font-family: "Kelly Slab", cursive;
-	background-color: rgba(0, 0, 0, 0);
+	background-color: rgba(92, 92, 92, 0);
 	z-index: 5;
 	opacity: 0;
-	color: #fffffd;
+	color: #efef44;
 	text-shadow:
        2px 2px 0 #000,
      -1px -1px 0 #000,  
@@ -393,6 +393,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#241b14', end
 @keyframes fadeIn {
 	0% {
 		opacity: 0;
+	}
+	40% {
+		opacity: 0;
+	}
+	60% {
+		opacity: .5;
 	}
 	100% {
 		opacity: .7;
@@ -519,4 +525,21 @@ crtOff::after {
   opacity: 0;
   z-index: 2;
   pointer-events: none;
+}
+
+#author {
+	padding-top: 25px;
+  text-align: center;
+  color: #c8c8c8;
+  font-family: Raleway;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 700px) {
+  .contain {
+    -moz-transform: scale(0.80);
+    -o-transform: scale(0.80);
+    -webkit-transform: scale(0.80);
+    transform: scale(0.80);
+  }
 }
