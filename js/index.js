@@ -22,6 +22,8 @@ $(document).ready(function(){
 
 	grabVideos();
 
+
+//Power button event handler
 	$(".power").on("click", function(){
 		power = !power;
 		$(".power").toggleClass("powerOn");
@@ -48,6 +50,8 @@ $(document).ready(function(){
 			});
 		}
 	});
+
+//Channel Buttons
 	$("#upButton").on("click", function(){
 		chSound.play();
 		if(channel < catArr.length + 1 && power && !powerUp){
@@ -66,6 +70,7 @@ $(document).ready(function(){
 		}
 	});
 
+//Startup Animation
 	function startUp(){
 		let startImage = "<div class='startImage onScreen'></div>";
 		$(".screen").append(startImage);
@@ -75,6 +80,7 @@ $(document).ready(function(){
 			}, 6000));
 	}
 
+//Play Selected Video
 	function playVideo(){
 		powerUp = false;
 		clearDiv(".channelScreen", channel);
@@ -98,6 +104,7 @@ $(document).ready(function(){
 		}
 	}
 
+//Turn TV off
 	function turnOff(){
 		$(".onScreen").addClass("turnOff");
 		setTimeout(function(){
@@ -106,6 +113,7 @@ $(document).ready(function(){
 		}, 275);
 	}
 
+//Get videos from YouTube	
 	function grabVideos(){
 		vidArr = [];
 		for (var i = 0; i < catArr.length; i++){
@@ -129,6 +137,7 @@ $(document).ready(function(){
 		}
 	}
 
+//Insert Videos into channel guide
 	function insertVideos(){
 		videos = [];
 		for (var i = 0; i < channelArr.length; i++){
