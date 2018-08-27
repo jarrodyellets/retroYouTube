@@ -77,7 +77,7 @@ body {
   left: -165px;
   width: 750px;
   height: 320px;
-  opacity: .7;
+  opacity: .5;
 }
 
 .sidePanel {
@@ -381,7 +381,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#241b14', end
 }
 
 @keyframes turnOff {
-  0%: {
+  0% {
     transform: rotateX(0deg);
   }
   100% {
